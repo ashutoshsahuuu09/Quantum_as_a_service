@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+env/
+*.sqlite3
+*.db
+
+# Node
+node_modules/
+/dist
+/build
+/.vite
+*.log
+
+# AI model
+ai-model/__pycache__/
+ai-model/*.log
+
+# Docker
+docker-compose.override.yml
+**/docker-compose.override.yml
+**/docker-compose.local.yml
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+~$*
+*.tmp
+*.temp

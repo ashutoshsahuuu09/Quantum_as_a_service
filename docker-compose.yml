@@ -1,0 +1,48 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: qaas-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  quantum-service:
+    build:
+      context: ./quantum-service
+    container_name: qaas-quantum
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+
+  backend:
+    build:
+      context: ./backend
+    container_name: qaas-backend
+    restart: unless-stopped
+    environment:
+      MONGO_URI: mongodb://mongo:27017
+      MONGO_DB: qaas
+      JWT_SECRET: change-this-secret
+      JWT_EXPIRE_MINUTES: 1440
+      QUANTUM_SERVICE_URL: http://quantum-service:8001
+      CORS_ORIGINS: '["http://localhost:5173"]'
+    depends_on:
+      - mongo
+      - quantum-service
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: qaas-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
+
+volumes:
+  mongo_data:

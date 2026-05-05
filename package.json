@@ -1,0 +1,14 @@
+{
+  "name": "qaas-platform",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently -k -n quantum,backend,frontend -c magenta,cyan,green \"npm run dev:quantum\" \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"cd backend; if (Test-Path .venv\\\\Scripts\\\\python.exe) { .venv\\\\Scripts\\\\python.exe -m uvicorn app.main:app --reload --port 8000 } else { python -m uvicorn app.main:app --reload --port 8000 }\"",
+    "dev:quantum": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"cd quantum-service; if (Test-Path .venv\\\\Scripts\\\\python.exe) { .venv\\\\Scripts\\\\python.exe -m uvicorn app.main:app --reload --port 8001 } else { python -m uvicorn app.main:app --reload --port 8001 }\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}

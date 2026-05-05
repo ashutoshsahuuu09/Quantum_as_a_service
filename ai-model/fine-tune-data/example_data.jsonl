@@ -1,0 +1,2 @@
+{"prompt":"Generate a Qiskit circuit that creates a Bell pair.","completion":"from qiskit import QuantumCircuit\nqc = QuantumCircuit(2, 2)\nqc.h(0)\nqc.cx(0, 1)\nqc.measure([0, 1], [0, 1])\nprint(qc)"}
+{"prompt":"Write a Qiskit circuit that initializes three qubits in superposition.","completion":"from qiskit import QuantumCircuit\nqc = QuantumCircuit(3, 3)\nqc.h([0, 1, 2])\nqc.measure([0, 1, 2], [0, 1, 2])\nprint(qc)"}
